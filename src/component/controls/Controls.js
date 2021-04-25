@@ -1,9 +1,11 @@
 import TextInput from './TextInput'
+import Select from './Select'
 import RadioGroup from './RadioGroup'
 
 const Controls = {
-  TextInput,
   RadioGroup,
+  Select,
+  TextInput,
 }
 
 export default Controls

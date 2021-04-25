@@ -20,6 +20,13 @@ const genderItems = [
   { id: 'nonbinary', title: 'Non-binary' },
 ]
 
+const departmentItems = [
+  { id: '1', title: 'Development' },
+  { id: '2', title: 'Marketing' },
+  { id: '3', title: 'HR' },
+  { id: '4', title: 'Accounting' },
+]
+
 function EmployeeForm() {
   const { values, setValues, handleChange } = useForm(initialValues)
 
@@ -53,6 +60,13 @@ function EmployeeForm() {
             value={values.gender}
             onChange={handleChange}
             items={genderItems}
+          />
+          <Controls.Select
+            name='departmentId'
+            label='Department'
+            value={values.departmentId}
+            onChange={handleChange}
+            options={departmentItems}
           />
         </Grid>
       </Grid>
