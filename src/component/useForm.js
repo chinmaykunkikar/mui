@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,7 +13,11 @@ const useStyles = makeStyles(theme => ({
 export function useForm(initialValues) {
   const [values, setValues] = useState(initialValues)
   const handleChange = event => {
-    const { name, value } = event.target
+    
+    const target = event.target
+    const value = target.type === 'checkbox' ? target.checked : target.value
+    const name = target.name
+
     setValues({
       ...values,
       [name]: value,
@@ -23,6 +27,6 @@ export function useForm(initialValues) {
 }
 
 export function Form(props) {
-    const classes = useStyles()
+  const classes = useStyles()
   return <form className={classes.root}>{props.children}</form>
 }
