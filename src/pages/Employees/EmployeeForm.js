@@ -68,6 +68,12 @@ function EmployeeForm() {
             onChange={handleChange}
             options={departmentItems}
           />
+          <Controls.DatePicker
+            name='joinDate'
+            label='Join Date'
+            value={values.joinDate}
+            onChange={handleChange}
+          />
           <Controls.Checkbox
             name='isPermanent'
             label='Permanent Employee'
