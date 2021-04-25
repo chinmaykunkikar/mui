@@ -8,6 +8,7 @@ const initialValues = {
   name: '',
   email: '',
   mobile: '',
+  city: '',
   gender: 'male',
   departmentId: '',
   joinDate: new Date(),
@@ -50,6 +51,12 @@ function EmployeeForm() {
             name='mobile'
             label='Mobile Number'
             value={values.mobile}
+            onChange={handleChange}
+          />
+          <Controls.TextInput
+            name='city'
+            label='City'
+            value={values.city}
             onChange={handleChange}
           />
         </Grid>
