@@ -29,10 +29,35 @@ const departmentItems = [
 ]
 
 function EmployeeForm() {
-  const { values, setValues, handleChange } = useForm(initialValues)
+  const {
+    values,
+    setValues,
+    errors,
+    setErrors,
+    handleChange,
+    resetForm,
+  } = useForm(initialValues)
+
+  const validate = () => {
+    let temp = {}
+    temp.name = values.name ? '' : 'Name is required'
+    temp.email = /$^|.+@.+..+/.test(values.email) ? '' : 'Not a valid email'
+    temp.mobile = values.mobile.length > 9 ? '' : 'Not a valid mobile number'
+    temp.departmentId =
+      values.departmentId.length !== 0 ? '' : 'Select a department'
+    setErrors({ ...temp })
+    return Object.values(temp).every(validField => validField === '')
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    if (validate()) {
+      window.alert('Success')
+    }
+  }
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Grid container>
         <Grid xs={6}>
           <Controls.TextInput
@@ -40,18 +65,21 @@ function EmployeeForm() {
             label='Name'
             value={values.name}
             onChange={handleChange}
+            error={errors.name}
           />
           <Controls.TextInput
             name='email'
             label='Email'
             value={values.email}
             onChange={handleChange}
+            error={errors.email}
           />
           <Controls.TextInput
             name='mobile'
             label='Mobile Number'
             value={values.mobile}
             onChange={handleChange}
+            error={errors.mobile}
           />
           <Controls.TextInput
             name='city'
@@ -74,6 +102,7 @@ function EmployeeForm() {
             value={values.departmentId}
             onChange={handleChange}
             options={departmentItems}
+            error={errors.departmentId}
           />
           <Controls.DatePicker
             name='joinDate'
@@ -88,17 +117,8 @@ function EmployeeForm() {
             onChange={handleChange}
           />
           <div>
-            <Controls.Button
-              text='Reset'
-              color='default'
-              onClick=''
-            />
-            <Controls.Button
-              text='Submit'
-              variant='contained'
-              type='submit'
-              onClick=''
-            />
+            <Controls.Button text='Reset' color='default' onClick={resetForm} />
+            <Controls.Button text='Submit' variant='contained' type='submit' />
           </div>
         </Grid>
       </Grid>
